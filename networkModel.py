@@ -4,7 +4,7 @@ from classes.portDetails import portDetails
 from classes.bandwidth import  bandwidth
 from dateutil import tz
 from flask import Flask
-
+from flask.ext.socketio import SocketIO
 import numpy as np
 import pandas as pd
 import scipy

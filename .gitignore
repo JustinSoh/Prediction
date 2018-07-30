@@ -22,6 +22,7 @@ var/
 wheels/
 *.egg-info/
 .installed.cfg
+.LogHub.json
 *.egg
 MANIFEST
 
