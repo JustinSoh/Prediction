@@ -1,5 +1,5 @@
 from classes.packet import packet
-from datetime import datetime
+from datetime import datetime , timedelta
 from classes.portDetails import portDetails
 from classes.bandwidth import  bandwidth
 from dateutil import tz
@@ -310,9 +310,10 @@ def calculateBandwidthRisk(bandwidth , value):
 
 #packets = readFromFile("data/logsv2.txt")
 #webPackets = getWebPackets(packets)
+from pytz import timezone
 
 def addIntoDB(bandwidthId, hostId, organizationId, riskScore , time , usage):
-
+    time = time - timedelta(hours=8);
     doc_ref = db.collection(u'Bandwidth').document()
     doc_ref.set(
         {
@@ -417,7 +418,9 @@ def updateAllData(data):
 
         count = calculateCount(xSource, ySource, comparisonDataFrameArray, initialDataFrame)
         #value to change
-        if float(count) >= 15:
+        data = [allData]
+        test = [None , None, None, time , xSource]
+        if float(count) >= 10:
             updateDB(documentIdTest , "included" , True)
 
         # ir = pd.DataFrame({'$x': Usage, '$y': Day})
@@ -477,21 +480,22 @@ def createBandwidthClass(doc):
 def addInFakeData():
 
     documentId = ["1", "2", "3" , "4" , "5" , "6" , "7" , "8", "9" , "10"]
-    bandwidthId = ["1", "2", "3" , "4" , "5" , "6" , "7" , "8", "9" , "10"]
-    hostId = ["host1", "host1" , "host1" ,"host1", "host1" , "hos    t2" , "host2" , "host2", "host2" ,"host2" ]
+    bandwidthId = ["1", "2", "3" , "4" , "5" , "6" , "7" , "8", "9" , "10" , "11" , "12" , "13" , "14" , "15" , "16" , "17" , "18" , "19" , "20" , "21" , "22" , "23" , "24" , "25" , "26" , "27" , "28" , "29" , "30" , "31", "32" , "33" , "34" , "35" , "36" , "37" , "38" , "39" , "40"]
+    hostId = ["host1", "host1" , "host1" ,"host1", "host1" , "hos    t2" , "host2" , "host2", "host2" ,"host2" , "host1", "host1" , "host1" ,"host1", "host1" , "hos    t2" , "host2" , "host2", "host2" ,"host2" , "host1", "host1" , "host1" ,"host1", "host1" , "host2" , "host2" , "host2", "host2" ,"host2" , "host1", "host1" , "host1" ,"host1", "host1" , "host2" , "host2" , "host2", "host2" ,"host2" ]
     riskScore = ["low" , "low" , "low" , "low" , "low" , "low" , "low" , "low" , "low" ,"low" ]
-    usage = ['300','400','500','100','200','700','500','300','300','200']
+    usage = ['300','400','500','100','200','700','500','300','300','200', '400', '300','400','500','100','200','700','700','300','300','200', '300','400','500','100','200','700','500','300','300','200','300','400','500','100','200','700','500','300','300','300']
     time = []
     from_zone = tz.gettz('GMT')
-    for i in range (0 , len(documentId)):
-        doc_ref = db.collection(u'Bandwidth').document(documentId[i])
+    for i in range (0 , len(bandwidthId)):
+        print(i)
+        doc_ref = db.collection(u'Bandwidth').document(bandwidthId[i])
         doc_ref.set(
             {
                 u'bandwidthId': bandwidthId[i] ,
                 u'hostId': hostId[i] ,
                 u'included' : True ,
                 u'organizationId': u'testing' ,
-                u'riskScore' : riskScore[i] ,
+                u'riskScore' : u'training' ,
                 u'time' :datetime.now(from_zone),
                 u'usage' : usage[i],
                 u'processed' : False
@@ -506,7 +510,7 @@ def addInFakeData():
             u'included' : False,
             u'organizationId': u'testing',
             u'riskScore': "none",
-            u'time': datetime.now(from_zone),
+            u'time': datetime.now(),
             u'usage': "50",
             u'processed': False
         }
@@ -550,6 +554,8 @@ def convertMessageIntoData(message):
     hostId = data[1]
     organizationId = data[2]
     time = datetime.strptime(data[3], ' %H:%M:%S %d/%m/%Y')
+    from_zone = tz.gettz('GMT')
+    time = time.replace(tzinfo=from_zone)
     txusage = data[4]
     txUsageMbits = convertUsageMetrics(txusage)
     rxusage = data[5]
@@ -568,29 +574,51 @@ cred = credentials.Certificate('./LogHub.json')
 default_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
+import time as timee
+import random
+import string
 @app.route('/')
 def hello_world():
 
-    # config = {
-    #
-    #     "serviceAccount": "./LogHub.json"
-    # };
-    #
-    # firebase = pyrebase.initialize_app(config)
-    # db = firebase.database()
-    # print(db.child().get().val())
-    # return bandwidth.val();
+    # mins = 0
+    # counter = 0;
+    # while mins < 30:
+    #     if counter % 4 == 0:
+    #         allData = readAllFromDB()
+    #         updateAllData(allData)
+    #     string.letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    #     data = readFromDB()
+    #     randomBandwidthId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+    #     randomhostId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+    #     organizationId = "testing"
+    #     time = datetime.now()
+    #     rx = random.randint(1, 2000)
+    #     tx = random.randint(1, 2000)
+    #     rxData = str(rx) + " mbit/s"
+    #     txData = str(tx) + " mbit/s"
+    #     random1 = randomBandwidthId + "," + randomhostId + "," + organizationId + ", " + str(time.hour)+":"+str(time.minute)+":"+str(time.second)+" "+str(time.day)+"/"+ str(time.month)+"/"+ str(time.year) + "," + rxData + "," + txData
+    #     print(random1)
+    #     test = convertMessageIntoData(random1)
+    #     value = getDistanceOfNeighbors(data, test)
+    #     print(value)
+    #     # value = calculateBandwidthRisk(bandwidth , test[4])
+    #     addIntoDB(bandwidthId=test[0], hostId=test[1], organizationId=test[2], riskScore=value, time=test[3],
+    #               usage=test[4])
+    #     #send(value, broadcast=True)
+    #     timee.sleep(2)
+    #     mins = mins + 0.033
+    #     counter = counter + 1;
     return render_template('index.html')
 
 
 from sklearn.datasets import *
 def calculateDistanceAndResults(trainingData , xValue , yValue ):
     #value to change
-    nn = NearestNeighbors(5)
+    nn = NearestNeighbors(15)
     nn.fit(trainingData)
     test = np.array([xValue, yValue])
     test1 = test.reshape(1, -1)
-    result = nn.kneighbors(test1, 5)
+    result = nn.kneighbors(test1, 15)
     return result
 def getDataframeFromResult(result , ir , xSource , ySource):
     distance = []
@@ -807,30 +835,34 @@ def getDistanceOfNeighbors(data , input):
     # print(clf)
 
 
-
 @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message);
-
     # data = readFromDB()
     # test = convertMessageIntoData("testing123,host1,testing, 22:14:32 29/7/2018,488 mbit/s,488 mbit/s")
     # getDistanceOfNeighbors(data ,test )
-    #
-    # trainingData = db.collection(u'Bandwidth').where(u'included', u'==', "true").get()
 
+    trainingData = db.collection(u'Bandwidth').where(u'included', u'==', "true").get()
     allData = readAllFromDB()
-    if len(allData[0]) < 40:
-        if message is not None:
+
+    if len(allData[0]) == 0:
+        addInFakeData()
+
+
+    if len(allData[0]) <= 40:
+        if message is not None :
             test = convertMessageIntoData(message)
             addIntoDB(bandwidthId=test[0], hostId=test[1], organizationId=test[2], riskScore="training", time=test[3],
                       usage=test[4])
             send("training data", broadcast=True)
+
+
     else:
         updateAllData(allData)
         #working
         data = readFromDB()
         if len(data[0]) == 0:
-            addInFakeData()
+             addInFakeData()
 
         if message is not None:
             data = readFromDB()
@@ -843,9 +875,12 @@ def handle_message(message):
             send(value, broadcast=True)
 
 
-if __name__ == '__main__':
 
-    socketio.run(app , host= '0.0.0.0')
+def randomGenerator(data):
+    r = random.choice(data)
+    return r
+if __name__ == '__main__':
+    socketio.run(app , host="0.0.0.0" )
 
     # bandwidth = getBandwidthThreshold()
         # riskLevel = calculateBandwidthRisk(bandwidth , msg)
