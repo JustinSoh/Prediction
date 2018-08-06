@@ -393,26 +393,26 @@ def updateAllData(data):
         for i in range(0, len(Day)):
             newData = [Usage[i], Day[i]]
             data.append(newData)
-        print("All data")
-        print(ir)
+        # print("All data")
+        # print(ir)
 
         result = calculateDistanceAndResults(data, xSource, ySource)
         initialDataFrame = getDataframeFromResult(result, ir, xSource, ySource)
         comparisonDataFrameArray = []
 
-        print("Initial Dataframe")
-        print("x is : " + str(xSource) + " and y is : " + str(ySource))
-        print(initialDataFrame.to_string())
+        # print("Initial Dataframe")
+        # print("x is : " + str(xSource) + " and y is : " + str(ySource))
+        # print(initialDataFrame.to_string())
 
         print("Comparison Started")
         for index, row in initialDataFrame.iterrows():
             newXSource = row['xTarget']
             newYSource = row['yTarget']
-            print("Original had x of " + str(xSource) + " y of " + str(ySource))
-            print(str(newXSource) + "|" + str(newYSource))
+            # print("Original had x of " + str(xSource) + " y of " + str(ySource))
+            # print(str(newXSource) + "|" + str(newYSource))
             result = calculateDistanceAndResults(data, newXSource, newYSource)
             dataFrame = getDataframeFromResult(result, ir, newXSource, newYSource)
-            print(dataFrame)
+            # print(dataFrame)
             comparisonDataFrameArray.append(dataFrame)
             print("==============")
 
@@ -533,7 +533,7 @@ from flask_socketio import SocketIO, send
 #addIntoDB("1", None, None , None ,None , None, None , None)
 
 def convertUsageMetrics(usage):
-    if "mbit/s" in usage:
+    if "Mbit/s" in usage:
         data = usage.split(" ")
         usageMb = float(data[0])
     elif "kbit/s" in usage:
@@ -574,41 +574,39 @@ cred = credentials.Certificate('./LogHub.json')
 default_app = firebase_admin.initialize_app(cred)
 db = firestore.client()
 
-import time as timee
-import random
-import string
-@app.route('/')
+
+# @app.route('/')
 def hello_world():
 
-    # mins = 0
-    # counter = 0;
-    # while mins < 30:
-    #     if counter % 4 == 0:
-    #         allData = readAllFromDB()
-    #         updateAllData(allData)
-    #     string.letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    #     data = readFromDB()
-    #     randomBandwidthId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-    #     randomhostId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
-    #     organizationId = "testing"
-    #     time = datetime.now()
-    #     rx = random.randint(1, 2000)
-    #     tx = random.randint(1, 2000)
-    #     rxData = str(rx) + " mbit/s"
-    #     txData = str(tx) + " mbit/s"
-    #     random1 = randomBandwidthId + "," + randomhostId + "," + organizationId + ", " + str(time.hour)+":"+str(time.minute)+":"+str(time.second)+" "+str(time.day)+"/"+ str(time.month)+"/"+ str(time.year) + "," + rxData + "," + txData
-    #     print(random1)
-    #     test = convertMessageIntoData(random1)
-    #     value = getDistanceOfNeighbors(data, test)
-    #     print(value)
-    #     # value = calculateBandwidthRisk(bandwidth , test[4])
-    #     addIntoDB(bandwidthId=test[0], hostId=test[1], organizationId=test[2], riskScore=value, time=test[3],
-    #               usage=test[4])
-    #     #send(value, broadcast=True)
-    #     timee.sleep(2)
-    #     mins = mins + 0.033
-    #     counter = counter + 1;
-    return render_template('index.html')
+    mins = 0
+    counter = 0;
+    while mins < 30:
+        if counter % 4 == 0:
+            allData = readAllFromDB()
+            #updateAllData(allData)
+        string.letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        data = readFromDB()
+        randomBandwidthId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+        randomhostId = ''.join(random.choices(string.ascii_uppercase + string.digits, k=10))
+        organizationId = "testing"
+        time = datetime.now()
+        rx = random.randint(30, 35)
+        tx = random.randint(30, 35)
+        rxData = str(rx) + " Mbit/s"
+        txData = str(tx) + " Mbit/s"
+        random1 = randomBandwidthId + "," + randomhostId + "," + organizationId + ", " + str(time.hour)+":"+str(time.minute)+":"+str(time.second)+" "+str(time.day)+"/"+ str(time.month)+"/"+ str(time.year) + "," + rxData + "," + txData
+        print(random1)
+        test = convertMessageIntoData(random1)
+        value = getDistanceOfNeighbors(data, test)
+        print(value)
+        # value = calculateBandwidthRisk(bandwidth , test[4])
+        addIntoDB(bandwidthId=test[0], hostId=test[1], organizationId=test[2], riskScore=value, time=test[3],
+                  usage=test[4])
+        #send(value, broadcast=True)
+        timee.sleep(2)
+        mins = mins + 0.033
+        counter = counter + 1;
+#     return render_template('index.html')
 
 
 from sklearn.datasets import *
@@ -712,15 +710,15 @@ def calculateRiskBasedOnMean(mean , count):
     elif count >= 2:
         countRisk = 0.2
     else:
-        countRisk = 0.6
+        countRisk = 0.65
 
-    if mean <=100:
+    if mean <= 10:
         meanRisk = 0.05
-    elif mean <= 300:
+    elif mean <= 20:
         meanRisk = 0.10
-    elif mean <= 600:
+    elif mean <= 30:
         meanRisk = 0.15
-    elif mean <= 800:
+    elif mean <= 40:
         meanRisk = 0.20
     else:
         meanRisk = 0.50
@@ -732,17 +730,19 @@ def calculateRiskBasedOnMean(mean , count):
     print(countRiskPercentage )
     print(meanRiskPercentage)
     print("asdasdasdasdd")
-    totalRisk =(countRisk +  meanRiskPercentage) * 100
-
+    totalRisk =(countRiskPercentage +  meanRiskPercentage) * 100
+    print(str(totalRisk) + "this is the total risk");
     finalRisk = ""
     if totalRisk <= 25.0:
         finalRisk = "Low"
     elif totalRisk <= 50.0:
         finalRisk = "Medium"
+
     elif totalRisk <= 75.0:
         finalRisk = "High"
     else:
         finalRisk = "Very High"
+    print(str(finalRisk) + " this is the final risk and the value is " + str(totalRisk))
     return finalRisk
 def calculateMeanDistance(initialData , xValue , yValue):
     print(initialData)
@@ -762,11 +762,18 @@ def getDistanceOfNeighbors(data , input):
 
     xSource = input[4]
     ySource = datetime.date(input[3]).weekday()
+    if(len(data[0]) < 50):
+        for i in data[0]:
+            Usage.append(i.usage)
+            Day.append(datetime.date(i.time).weekday())
+            Class.append(0)
+    else:
+        data[0].sort(key=lambda c: c.usage)
+        for i in range(len(data[0]) - 50 , len(data[0])):
+            Usage.append(data[0][i].usage)
+            Day.append(datetime.date(data[0][i].time).weekday())
+            Class.append(0)
 
-    for i in data[0]:
-        Usage.append(i.usage)
-        Day.append(datetime.date(i.time).weekday())
-        Class.append(0)
     ir = pd.DataFrame({'$x': Usage, '$y': Day})
     ir.columns = ["x" , "y"]
     ir['CLASS'] = Class
@@ -835,9 +842,11 @@ def getDistanceOfNeighbors(data , input):
     # print(clf)
 
 
-@socketio.on('message')
+# @socketio.on('message')
 def handle_message(message):
     print('received message: ' + message);
+
+
     # data = readFromDB()
     # test = convertMessageIntoData("testing123,host1,testing, 22:14:32 29/7/2018,488 mbit/s,488 mbit/s")
     # getDistanceOfNeighbors(data ,test )
@@ -845,8 +854,9 @@ def handle_message(message):
     trainingData = db.collection(u'Bandwidth').where(u'included', u'==', "true").get()
     allData = readAllFromDB()
 
-    if len(allData[0]) == 0:
-        addInFakeData()
+    # if len(allData[0]) == 0:
+    #     addInFakeData()
+
 
 
     if len(allData[0]) <= 40:
@@ -854,33 +864,33 @@ def handle_message(message):
             test = convertMessageIntoData(message)
             addIntoDB(bandwidthId=test[0], hostId=test[1], organizationId=test[2], riskScore="training", time=test[3],
                       usage=test[4])
-            send("training data", broadcast=True)
+            #send("training data", broadcast=True)
 
 
     else:
         updateAllData(allData)
         #working
-        data = readFromDB()
-        if len(data[0]) == 0:
-             addInFakeData()
-
+        # data = readFromDB()
+        # if len(data[0]) == 0:
+        #      addInFakeData()
+        #
         if message is not None:
             data = readFromDB()
             test = convertMessageIntoData(message)
             value = getDistanceOfNeighbors(data, test)
-            print(value)
+            # print(value)
             # value = calculateBandwidthRisk(bandwidth , test[4])
             addIntoDB(bandwidthId=test[0], hostId=test[1], organizationId=test[2], riskScore=value, time=test[3],
                       usage=test[4])
-            send(value, broadcast=True)
+            #send(value, broadcast=True)
 
 
 
 def randomGenerator(data):
     r = random.choice(data)
     return r
-if __name__ == '__main__':
-    socketio.run(app , host="0.0.0.0" )
+# if __name__ == '__main__':
+#     socketio.run(app , host="0.0.0.0" )
 
     # bandwidth = getBandwidthThreshold()
         # riskLevel = calculateBandwidthRisk(bandwidth , msg)
@@ -891,4 +901,52 @@ if __name__ == '__main__':
         # print('Value of : ' + msg + " has a risk score of " + riskLevel)
 
 
+def splitIdentifier(data):
+    d = data.split("{")
+    data = d[1].split("}")
+    return data[0]
 
+import time as timee
+import random
+import string
+import socket
+import sys
+from _thread import *
+HOST = ""
+PORT = 7777
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+print('Socket created!')
+try:
+    # hello_world()
+    s.bind((HOST, PORT))
+except socket.error as msg:
+    print('Error: ' + str(msg[0] + ' Message ' + msg[1]))
+    sys.exit()
+
+print('Socket bind complete.')
+data = open("data/data.txt" , "r")
+
+s.listen(10)
+print('Now listening')
+dt = datetime.now();
+
+def clientthread(conn):
+    num = 0;
+    while True:
+
+        data = (conn.recv(1028)).decode('utf-8')
+        print(data)
+
+        # getHostIdentification(data)
+        if num == 0:
+            num = num + 1
+        else:
+            # overall bandwidth
+            handle_message(data)
+    conn.close()
+
+
+while 1:
+    conn, addr = s.accept()
+    print('Connected with ' + addr[0] + ':' + str(addr[1]))
+    start_new_thread(clientthread, (conn,))

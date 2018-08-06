@@ -1,0 +1,49 @@
+SHAMISEN 2/8/2018 3:50:02 PM testing: LogHub has started.
+SHAMISEN 2/8/2018 3:50:02 PM testing: Organization ID{testing}
+SHAMISEN 2/8/2018 3:50:02 PM testing: Hostname{SHAMISEN}
+SHAMISEN 2/8/2018 3:50:02 PM testing: IP Address{192.168.1.145}
+SHAMISEN 2/8/2018 3:50:02 PM testing: MAC Address{00215CCCE9A3}
+SHAMISEN 2/8/2018 3:50:02 PM testing: Default Gateway{192.168.1.1}
+SHAMISEN 2/8/2018 3:50:02 PM testing: Application Event Log{
+Log Type: Information
+Category: (0)
+Event ID: 0
+Machine: Shamisen
+Description:<Service started successfully.>}
+SHAMISEN 2/8/2018 3:50:04 PM testing: Download/Upload{0B/s,0B/s}
+SHAMISEN 2/8/2018 3:50:05 PM testing: Download/Upload{0B/s,164B/s}
+SHAMISEN 2/8/2018 3:50:06 PM testing: Download/Upload{81B/s,484B/s}
+SHAMISEN 2/8/2018 3:50:07 PM testing: Download/Upload{0B/s,0B/s}
+SHAMISEN 2/8/2018 3:50:08 PM testing: Download/Upload{81B/s,164B/s}
+SHAMISEN 2/8/2018 3:50:09 PM testing: Download/Upload{0B/s,54B/s}
+SHAMISEN 2/8/2018 3:50:10 PM testing: Download/Upload{194B/s,219B/s}
+SHAMISEN 2/8/2018 3:50:11 PM testing: Download/Upload{81B/s,486B/s}
+SHAMISEN 2/8/2018 3:50:12 PM testing: Download/Upload{827B/s,574B/s}
+SHAMISEN 2/8/2018 3:50:13 PM testing: Download/Upload{0B/s,168B/s}
+SHAMISEN 2/8/2018 3:50:14 PM testing: Download/Upload{0B/s,0B/s}
+SHAMISEN 2/8/2018 3:50:15 PM testing: Download/Upload{81B/s,164B/s}
+SHAMISEN 2/8/2018 3:50:16 PM testing: Download/Upload{81B/s,485B/s}
+SHAMISEN 2/8/2018 3:50:17 PM testing: Download/Upload{0B/s,0B/s}
+SHAMISEN 2/8/2018 3:50:18 PM testing: Download/Upload{465B/s,218B/s}
+SHAMISEN 2/8/2018 3:50:19 PM testing: Download/Upload{0B/s,168B/s}
+SHAMISEN 2/8/2018 3:50:20 PM testing: Download/Upload{0B/s,0B/s}
+SHAMISEN 2/8/2018 3:50:21 PM testing: Download/Upload{81B/s,482B/s}
+SHAMISEN 2/8/2018 3:50:22 PM testing: Battery{83}
+SHAMISEN 2/8/2018 3:50:22 PM testing: Download/Upload{135B/s,262B/s}
+SHAMISEN 2/8/2018 3:50:23 PM testing: Download/Upload{0B/s,54B/s}
+SHAMISEN 2/8/2018 3:50:24 PM testing: Download/Upload{0B/s,54B/s}
+SHAMISEN 2/8/2018 3:50:25 PM testing: Download/Upload{81B/s,165B/s}
+SHAMISEN 2/8/2018 3:50:26 PM testing: Download/Upload{81B/s,485B/s}
+SHAMISEN 2/8/2018 3:50:27 PM testing: Download/Upload{81B/s,167B/s}
+SHAMISEN 2/8/2018 3:50:28 PM testing: Download/Upload{81B/s,167B/s}
+SHAMISEN 2/8/2018 3:50:29 PM testing: Download/Upload{81B/s,167B/s}
+SHAMISEN 2/8/2018 3:50:30 PM testing: Download/Upload{81B/s,167B/s}
+SHAMISEN 2/8/2018 3:50:31 PM testing: Download/Upload{1266B/s,2477B/s}
+SHAMISEN 2/8/2018 3:50:32 PM testing: Download/Upload{238B/s,234B/s}
+SHAMISEN 2/8/2018 3:50:33 PM testing: Download/Upload{81B/s,168B/s}
+SHAMISEN 2/8/2018 3:50:34 PM testing: Download/Upload{0B/s,167B/s}
+SHAMISEN 2/8/2018 3:50:35 PM testing: Download/Upload{0B/s,0B/s}
+SHAMISEN 2/8/2018 3:50:36 PM testing: Download/Upload{81B/s,482B/s}
+SHAMISEN 2/8/2018 3:50:37 PM testing: Download/Upload{81B/s,167B/s}
+SHAMISEN 2/8/2018 3:50:38 PM testing: Download/Upload{81B/s,167B/s}
+SHAMISEN 2/8/2018 3:50:39 PM testing: Download/Upload{0B/s,0B/s}
