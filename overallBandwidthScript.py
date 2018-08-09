@@ -714,11 +714,11 @@ def calculateRiskBasedOnMean(mean , count):
 
     if mean <= 10:
         meanRisk = 0.05
-    elif mean <= 20:
+    elif mean <= 15:
         meanRisk = 0.10
-    elif mean <= 30:
+    elif mean <= 20:
         meanRisk = 0.15
-    elif mean <= 40:
+    elif mean <= 25:
         meanRisk = 0.20
     else:
         meanRisk = 0.50

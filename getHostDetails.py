@@ -102,7 +102,7 @@ db = firestore.client()
 
 
 HOST = ""
-PORT = 10009
+PORT = 10011
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
 print('Socket created!')
